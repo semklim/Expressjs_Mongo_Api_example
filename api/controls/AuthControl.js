@@ -2,7 +2,6 @@ const { validationResult } = require("express-validator");
 const User = require("../models/User");
 const AuthService = require("../service/AuthService");
 
-
 class AuthControl {
   async registration(req, res, next) {
     try {
@@ -13,9 +12,16 @@ class AuthControl {
       }
       const { userName, password, email } = req.body;
 
-      const userData = await AuthService.registration(userName, email, password);
+      const userData = await AuthService.registration(
+        userName,
+        email,
+        password,
+      );
 
-      res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+      res.cookie("refreshToken", userData.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
       res.status(200).json(userData);
     } catch (e) {
       console.log(e);
@@ -26,11 +32,16 @@ class AuthControl {
   async login(req, res, next) {
     try {
       const { userEmail, password } = req.body;
+      console.log(userEmail, password);
       const userData = await AuthService.login(userEmail, password);
-      res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+      res.cookie("refreshToken", userData.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
       res.status(200).json(userData);
     } catch (e) {
       console.log(e);
+      res.status(400).json({ code: 400, message: e.message });
     }
   }
 
@@ -44,14 +55,16 @@ class AuthControl {
     } catch (e) {
       console.log(e);
     }
-
   }
 
   async refresh(req, res, next) {
     try {
       const { refreshToken } = req.cookies;
       const userData = await AuthService.refresh(refreshToken);
-      res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+      res.cookie("refreshToken", userData.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
     } catch (e) {
       console.log(e);
     }

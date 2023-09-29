@@ -29,9 +29,9 @@ To register a new user, send a POST request to the `/api/register` endpoint with
 
 ```json
 {
-	"userName": "semklim",
-	"password": "12312",
-	"email": "semklim@gmail.com"
+  "userName": "semklim",
+  "password": "12312",
+  "email": "semklim@gmail.com"
 }
 ```
 
@@ -49,8 +49,8 @@ To authenticate a user, send a POST request to the `/api/login` endpoint with th
 
 ```json
 {
-	"userEmail": "semklim@gmail.com",
-	"password": "200996Ro"
+  "userEmail": "semklim@gmail.com",
+  "password": "200996Ro"
 }
 ```
 

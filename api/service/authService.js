@@ -1,6 +1,6 @@
 const User = require("../models/User");
-const bcrypt = require('bcrypt');
-const uuid = require('uuid');
+const bcrypt = require("bcrypt");
+const uuid = require("uuid");
 const mailService = require("./mailService");
 const TokenService = require("./tokenService");
 const UserDto = require("../dtos/userDto");
@@ -15,7 +15,12 @@ class AuthService {
     const hashPassword = await bcrypt.hash(password, 5);
     const activationLink = uuid.v4();
 
-    const user = new User({ userName, userEmail, password: hashPassword, activationLink });
+    const user = new User({
+      userName,
+      userEmail,
+      password: hashPassword,
+      activationLink,
+    });
     await user.save();
     // await mailService.sendActivationMail(userEmail, `${process.env.API_URL}/api/activate/${activationLink}`);
 
@@ -26,15 +31,15 @@ class AuthService {
 
     return {
       ...tokens,
-      user: userDto
-    }
+      user: userDto,
+    };
   }
 
   async activation(activationLink) {
     try {
       const user = await User.findOne({ activationLink });
       if (!user) {
-        throw new Error('User was activated already')
+        throw new Error("User was activated already");
       }
       user.isActivated = true;
       await user.save();
@@ -45,7 +50,7 @@ class AuthService {
   async login(userEmail, password) {
     const userRef = await User.findOne({ userEmail });
     if (!userRef) {
-      throw new Error('Ho are you?');
+      throw new Error("user with this email don't find");
     }
 
     const isPassEquals = bcrypt.compare(password, userRef.password);
@@ -60,8 +65,8 @@ class AuthService {
 
     return {
       ...tokens,
-      user: userDto
-    }
+      user: userDto,
+    };
   }
 
   async logout(refreshToken) {
@@ -71,14 +76,14 @@ class AuthService {
 
   async refresh(refreshToken) {
     if (!refreshToken) {
-      throw new Error('User is unauthorize');
+      throw new Error("User is unauthorize");
     }
 
     const userData = TokenService.validationRefreshToken(refreshToken);
     const tokenFromDb = await TokenService.findToken(refreshToken);
 
     if (!userData || !tokenFromDb) {
-      throw new Error('User is unauthorize');
+      throw new Error("User is unauthorize");
     }
     const userRef = await User.findOne(userData.id);
     const userDto = new UserDto(userRef);
@@ -88,15 +93,13 @@ class AuthService {
 
     return {
       ...tokens,
-      user: userDto
-    }
+      user: userDto,
+    };
   }
 
   async getUsers() {
     return User.find();
   }
-
-
 }
 
 module.exports = new AuthService();

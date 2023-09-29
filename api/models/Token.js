@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const TokenSchema = Schema({
   user: { type: Schema.Types.ObjectId, require: true, ref: "User" },
