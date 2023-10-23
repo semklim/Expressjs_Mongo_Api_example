@@ -1,4 +1,4 @@
-# Website example of Authentication and Registration API using JSON Web Tokens, Express.js and MongoDB
+# Website example of Authentication and Registration API using JSON Web Tokens, nodemailer, Express.js and MongoDB
 
 This README provides a comprehensive guide on how to set up and use the Authentication and Registration API using Express.js and MongoDB. This API allows you to handle user registration, activation, authentication, token refresh, retrieve users' information from the database, and manage email-based activation, as well as handle user logout.
 
@@ -18,6 +18,11 @@ npm i
 ```
 
 2. Create a `.env` file in the root directory. Look inside the file .env.example for details.
+
+3. Check how to use google smtp server for sending email. Otherwise you will get an error.
+
+[https://support.google.com/a/answer/176600?hl=en](https://support.google.com/a/answer/176600?hl=en)
+[https://support.google.com/a/answer/2956491?sjid=4893799287504753245-EU#sendinglimitsforrelay](https://support.google.com/a/answer/2956491?sjid=4893799287504753245-EU#sendinglimitsforrelay)
 
 ## Usage
 
