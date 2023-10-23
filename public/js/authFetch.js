@@ -10,11 +10,11 @@ export default async function loginAndReg(url, body) {
     });
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(`Code: ${err.code},\n ${err.message}`, { cause: err });
+      throw new Error(err.message, { cause: err });
     }
     return res.json();
   } catch (e) {
     console.log(e);
-    return null;
+    return e;
   }
 };
