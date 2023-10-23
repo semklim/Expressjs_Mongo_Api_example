@@ -10,7 +10,7 @@ apiRouter.post(
     check("userName", "Not valid userName").notEmpty(),
     check("password", "Not Valid password")
       .notEmpty()
-      .isLength({ min: 3, max: 10 }),
+      .isLength({ min: 3 }),
     check("email", "Not Valid email").isEmail(),
   ],
   controller.registration,

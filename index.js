@@ -4,19 +4,20 @@ const path = require("path");
 const compression = require("compression");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const corsOptions = require('./corsOptions/corsOptions');
 const mongoose = require("mongoose");
 const apiRouter = require("./routers/apiRouter");
 const clientRouter = require("./routers/clientRouter");
-const PORT = process.argv[2] === '8888' ? 8888 : 3000;
-const link = `http://localhost:${PORT}/`;
+const PORT = process.env.API_PORT;
+const link = `${process.env.API_URL}`;
 
-const url = `mongodb+srv://${process.env.MONGO_LOGIN}:${process.env.MONGO_PASSWORD}@userauth.srq6zlv.mongodb.net/UserAuth?retryWrites=true&w=majority`;
+const url = process.env.MONGO_URL;
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use("/api", apiRouter);
 app.use(compression());
 app.use(express.static(path.join(process.cwd(), "public")));
@@ -33,7 +34,7 @@ const start = async () => {
 };
 start();
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log('\x1b[36m%s\x1b[0m', '\nExpress server has been started at the port ', PORT);
   console.log(`\n    Link to the site \x1b[35m${link}\x1b[0m`);
 });

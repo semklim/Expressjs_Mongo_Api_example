@@ -22,7 +22,7 @@ class AuthService {
       activationLink,
     });
     await user.save();
-    // await mailService.sendActivationMail(userEmail, `${process.env.API_URL}/api/activate/${activationLink}`);
+    const answer = await mailService.sendActivationMail(userEmail, `${process.env.API_URL}/api/activate/${activationLink}`);
 
     const userDto = new UserDto(user);
 
@@ -32,6 +32,7 @@ class AuthService {
     return {
       ...tokens,
       user: userDto,
+      ...answer,
     };
   }
 
@@ -53,7 +54,8 @@ class AuthService {
       throw new Error("user with this email don't find");
     }
 
-    const isPassEquals = bcrypt.compare(password, userRef.password);
+    debugger;
+    const isPassEquals = await bcrypt.compare(password, userRef.password);
     if (!isPassEquals) {
       throw new Error("Password is wrong");
     }
