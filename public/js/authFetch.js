@@ -14,7 +14,6 @@ export default async function loginAndReg(url, body) {
     }
     return res.json();
   } catch (e) {
-    console.log(e);
     return e;
   }
 };

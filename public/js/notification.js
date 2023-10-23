@@ -26,5 +26,5 @@ export default function notification(err = null) {
 
   setTimeout(() => {
     el.remove();
-  }, 1000);
+  }, 2000);
 }
