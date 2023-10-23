@@ -1,4 +1,4 @@
-# Website portfolio + Authentication and Registration API using Express.js and MongoDB
+# Website example of Authentication and Registration API using JSON Web Tokens, Express.js and MongoDB
 
 This README provides a comprehensive guide on how to set up and use the Authentication and Registration API using Express.js and MongoDB. This API allows you to handle user registration, activation, authentication, token refresh, retrieve users' information from the database, and manage email-based activation, as well as handle user logout.
 
@@ -85,7 +85,7 @@ Start the Express server by running:
 npm start
 ```
 
-The server will run on the port 3000.
+The server will run on the port 5000.
 
 ## Conclusion
 
