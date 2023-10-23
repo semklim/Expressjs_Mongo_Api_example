@@ -1,4 +1,4 @@
-const whitelist = ['http://127.0.0.1:5000', 'https://brshoes.pp.ua'];
+const whitelist = ['https://expressjs-mongo-api-example.vercel.app'];
 
 module.exports = corsOptions = {
   origin: (origin, callback) => {
