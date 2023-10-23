@@ -38,3 +38,5 @@ app.listen(PORT, () => {
   console.log('\x1b[36m%s\x1b[0m', '\nExpress server has been started at the port ', PORT);
   console.log(`\n    Link to the site \x1b[35m${link}\x1b[0m`);
 });
+
+module.exports = app;

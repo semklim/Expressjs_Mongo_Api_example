@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "expressmongodb",
   "builds": [{ "src": "index.js", "use": "@now/node" }],
   "routes": [{ "src": "/(.*)", "dest": "index.js" }]
 }
