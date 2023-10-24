@@ -1,7 +1,3 @@
-import loginAndReg from "./authFetch.js";
-import notification from "./notification.js";
-
-
 const singIn = document.querySelector('.sing-in');
 const singUp = document.querySelector('.singUpLink');
 const singUpTxt = document.querySelector('.sing-upText');
@@ -27,6 +23,63 @@ if (userDto && userDto.user && userDto.user.userEmail) {
     location.reload();
   }, { once: true });
 }
+
+
+async function loginAndReg(url, body) {
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message, { cause: err });
+    }
+    return res.json();
+  } catch (e) {
+    return e;
+  }
+}
+
+
+// notification
+
+const notif = document.getElementsByClassName('notification')[0];
+
+const template = (err) => {
+  if (err.message) {
+    return `
+    <div class="alert alert-err alert-success d-flex p-4 rounded-3" role="alert">
+        <i class="fa fa-exclamation-triangle text-success me-3 align-self-center"></i>
+        <div class="mb-0">${err.message}</div>
+        <button type="button" class="btn-close btn-sm" aria-label="Close"></button>
+    </div>
+    `;
+  } else {
+    return `
+    <div class="alert alert-success d-flex p-4 rounded-3" role="alert">
+        <i class="fa fa-check-circle text-success me-3 align-self-center"></i>
+        <div class="mb-0">Success.</div>
+        <button type="button" class="btn-close btn-sm" aria-label="Close"></button>
+    </div>
+    `;
+  }
+};
+
+function notification(err = null) {
+  notif.insertAdjacentHTML('beforeend', template(err));
+  const el = notif.lastElementChild;
+
+  setTimeout(() => {
+    el.remove();
+  }, 2000);
+}
+
+//end notification
 
 
 function accessAlow() {
