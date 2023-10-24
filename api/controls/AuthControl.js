@@ -25,7 +25,7 @@ class AuthControl {
       res.status(200).json(userData);
     } catch (e) {
       console.log(e);
-      res.status(400).json(e.message);
+      res.status(400).json({ code: 400, message: e.message });
     }
   }
 
