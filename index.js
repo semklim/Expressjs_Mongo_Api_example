@@ -27,9 +27,10 @@ const start = async () => {
   try {
     await mongoose
       .connect(url, { dbName: "Auth" })
-      .catch((e) => console.log(e));
+      .catch((e) => { console.log(e) });
   } catch (e) {
     console.log(e);
+    process.exit(1);
   }
 };
 start();
@@ -39,4 +40,3 @@ app.listen(PORT, () => {
   console.log(`\n    Link to the site \x1b[35m${link}\x1b[0m`);
 });
 
-module.exports = app;
