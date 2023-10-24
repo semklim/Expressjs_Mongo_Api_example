@@ -1,4 +1,4 @@
-const whitelist = ['https://expressjs-mongo-api-example.vercel.app', 'https://expressjs-mongo-api-example.vercel.app'];
+const whitelist = [process.env.API_URL, process.env.CLIENT_URL];
 
 module.exports = corsOptions = {
   origin: (origin, callback) => {
