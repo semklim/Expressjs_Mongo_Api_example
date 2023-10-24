@@ -5,7 +5,7 @@
     {
       "src": "/(.*)",
       "headers": {
-        "Cache-Control": "no-store, must-revalidate"
+        "Cache-Control": "no-store"
       },
       "dest": "/index.js"
     }
