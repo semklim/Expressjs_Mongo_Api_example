@@ -17,7 +17,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use("/api", apiRouter);
 app.use(compression());
 app.use(express.static(path.join(process.cwd(), "public")));
