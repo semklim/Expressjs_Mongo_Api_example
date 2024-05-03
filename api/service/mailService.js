@@ -48,7 +48,9 @@ class MailService {
               ${email}
           </div>
         `,
-        
+        headers: {
+          "From": process.env.SMTP_USER
+        }
       }, (err, info) => {
 
         console.log(err, info);
